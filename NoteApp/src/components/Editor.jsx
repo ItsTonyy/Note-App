@@ -31,6 +31,6 @@ export default function Editor({ currentNote, updateNote }) {
 }
 
 Editor.propTypes = {
-    currentNote: PropTypes.string,
-    updateNote: PropTypes.string,
+    currentNote: PropTypes.string.isRequired,
+    updateNote: PropTypes.string.isRequired,
 }
