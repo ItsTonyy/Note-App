@@ -7,29 +7,21 @@ import { db, notesCollection } from './firebase'
 
 export default function App() {
 	const [notes, setNotes] = useState([])
-
 	const [currentNoteId, setCurrentNoteId] = useState('')
 
 	const currentNote =
-		notes.find((note) => {
-			return note.id === currentNoteId
-		}) || notes[0]
+		notes.find((note) => note.id === currentNoteId) || notes[0]
 
 	const sortedNotes = notes.sort((a, b) => b.updatedAt - a.updatedAt)
 
-	console.log(sortedNotes)
-
 	useEffect(() => {
-		const unsubscribe = onSnapshot(notesCollection, (snapshot) => {
-			// Sync up our local notes array with the snapshot data
+		const unsubscribe = onSnapshot(notesCollection, function (snapshot) {
 			const notesArr = snapshot.docs.map((doc) => ({
 				...doc.data(),
 				id: doc.id,
 			}))
-
 			setNotes(notesArr)
 		})
-
 		return unsubscribe
 	}, [])
 
@@ -38,8 +30,6 @@ export default function App() {
 			setCurrentNoteId(notes[0]?.id)
 		}
 	}, [notes])
-
-	useEffect(() => {}, [notes])
 
 	async function createNewNote() {
 		const newNote = {
@@ -52,9 +42,8 @@ export default function App() {
 	}
 
 	async function updateNote(text) {
-		// Put the most recently-modified note at the top
 		const docRef = doc(db, 'notes', currentNoteId)
-		await setDoc(docRef, { body: text, updateAt: Date.now() }, { merge: true })
+		await setDoc(docRef, { body: text, updatedAt: Date.now() }, { merge: true })
 	}
 
 	async function deleteNote(noteId) {
@@ -63,28 +52,26 @@ export default function App() {
 	}
 
 	return (
-		<>
-			<main>
-				{notes.length > 0 ? (
-					<Split sizes={[30, 70]} direction='horizontal' className='split'>
-						<Sidebar
-							notes={sortedNotes}
-							currentNote={currentNote}
-							setCurrentNoteId={setCurrentNoteId}
-							newNote={createNewNote}
-							deleteNote={deleteNote}
-						/>
-						<Editor currentNote={currentNote} updateNote={updateNote} />
-					</Split>
-				) : (
-					<div className='no-notes'>
-						<h1>You have no notes</h1>
-						<button className='first-note' onClick={createNewNote}>
-							Create one now
-						</button>
-					</div>
-				)}
-			</main>
-		</>
+		<main>
+			{notes.length > 0 ? (
+				<Split sizes={[30, 70]} direction='horizontal' className='split'>
+					<Sidebar
+						notes={sortedNotes}
+						currentNote={currentNote}
+						setCurrentNoteId={setCurrentNoteId}
+						newNote={createNewNote}
+						deleteNote={deleteNote}
+					/>
+					<Editor currentNote={currentNote} updateNote={updateNote} />
+				</Split>
+			) : (
+				<div className='no-notes'>
+					<h1>You have no notes</h1>
+					<button className='first-note' onClick={createNewNote}>
+						Create one now
+					</button>
+				</div>
+			)}
+		</main>
 	)
 }
