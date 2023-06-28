@@ -33,11 +33,11 @@ export default function Sidebar({notes, currentNote, setCurrentNoteId, deleteNot
 }
 
 Sidebar.propTypes = {
-    notes: PropTypes.string.isRequired,
-    currentNote: PropTypes.string.isRequired,
-    setCurrentNoteId: PropTypes.string.isRequired,
-    deleteNote: PropTypes.string.isRequired,
-    newNote: PropTypes.string.isRequired
+    notes: PropTypes.string,
+    currentNote: PropTypes.string,
+    setCurrentNoteId: PropTypes.string,
+    deleteNote: PropTypes.string,
+    newNote: PropTypes.string
 }
 
 
