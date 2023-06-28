@@ -3,7 +3,7 @@ import ReactMde from "react-mde"
 import Showdown from "showdown"
 import PropTypes from 'prop-types'
 
-export default function Editor({ currentNote, updateNote }) {
+export default function Editor({ tempNoteText, setTempNoteText }) {
   const [selectedTab, setSelectedTab] = useState("write")
 
   const converter = new Showdown.Converter({
@@ -16,8 +16,8 @@ export default function Editor({ currentNote, updateNote }) {
   return (
       <section className="editor">
           <ReactMde
-              value={currentNote?.body}
-              onChange={updateNote}
+              value={tempNoteText?.body}
+              onChange={setTempNoteText}
               selectedTab={selectedTab}
               onTabChange={setSelectedTab}
               generateMarkdownPreview={(markdown) =>
@@ -31,6 +31,6 @@ export default function Editor({ currentNote, updateNote }) {
 }
 
 Editor.propTypes = {
-    currentNote: PropTypes.string,
-    updateNote: PropTypes.string,
+    tempNoteText: PropTypes.string,
+    setTempNoteText: PropTypes.string,
 }

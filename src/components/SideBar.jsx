@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 
 export default function Sidebar({notes, currentNote, setCurrentNoteId, deleteNote, newNote}) {
   const noteElements = notes.map((note) => (
-      <div key={note.id}>
+      <div key={note.id} className='eachNote'>
           <div
               
               className={`title ${

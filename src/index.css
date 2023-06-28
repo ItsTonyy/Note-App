@@ -57,7 +57,7 @@ button:focus {
 
 .new-note {
   cursor: pointer;
-  background-color: #4A4E74;
+  background-color: #6B54D7;
   border: none;
   color: white;
   border-radius: 3px;
@@ -73,7 +73,7 @@ button:focus {
 
 .first-note {
   cursor: pointer;
-  background-color: #4A4E74;
+  background-color: #6B54D7;
   border: none;
   color: white;
   border-radius: 10px;
@@ -129,7 +129,7 @@ button:focus {
 }
 
 .selected-note {
-  background-color: #4A4E74;
+  background-color: #6B54D7;
 }
 
 .selected-note .text-snippet {
@@ -231,3 +231,6 @@ button:focus {
   top: -7px;
   left: -2px
 } 
+
+/* added by me */
+
